@@ -7,7 +7,10 @@ begin
 	ref (ArrayList) array content(1:100);
 	integer content_pointer;
 	
-	
+	! --------------------------------------------- ;
+	!                key content stuff              ;                  
+	! --------------------------------------------- ;
+		
 	procedure add_key(key); text key;
 	begin
 		element_keys.add(key);
@@ -29,10 +32,34 @@ begin
 	! get the content of a key ;
 	ref (ArrayList) procedure get_content(key); text key; get_content :- content(element_keys.indexOf(key));
 	
-	! get the content from a index;
-	ref (ArrayList) procedure get_content_int(index); integer index; get_content_int :- content(index)
+	! get the content from a index ;
+	ref (ArrayList) procedure get_content_int(index); integer index; get_content_int :- content(index);
 	
-	! starter ;
+	! --------------------------------------------- ;
+	!                text line parsing              ;                  
+	! --------------------------------------------- ;
+	
+	! split by isolating production in an array ;
+	text array split_productions(input_line); text line; begin
+		text segment;
+		integer i;
+		
+		input_line.setpos(1);
+		segment.setpos(1);
+		
+		! iterate line chars ;
+		while input_line.more do begin
+			
+		end;
+		
+		
+	end;
+	
+	
+	! --------------------------------------------- ;
+	!                generator content              ;                  
+	! --------------------------------------------- ;
+	
 	text procedure generate; begin
 		
 	
@@ -45,9 +72,24 @@ begin
 		integer rInt;
 		ref (ArrayList)	prod_cont;
 		
-		!prod_cont :- get_content(production);
-		!prod_cont.print;	
+		prod_cont :- get_content(production);
+		prod_cont.print;	
+		
+		rInt := randint(1,prod_cont.length,seed);
+		outInt(rInt, 6); outImage;
+		OutText(prod_cont.get(rInt));
+		
+		! put stuff in array. Each index has either
+		  a string or production
+		;
+		
+		
+		! look though array to find produxtion and recurse replace the <production> for new string;
+		
+		! iterate array and add to result ;
 
+		! clean the result ;
+		result :- result.strip
 		generateRec :- Copy("wip");
 	end;
 

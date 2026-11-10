@@ -36,47 +36,6 @@ begin
 		
 		replace :- result.strip;
 	end;
-
-	
-	
-	! procedure to parseGrammer ;
-	text procedure parseGrammer(production, element_keys, content);
-	text production;
-	ref (ArrayList) element_keys;
-	ref (ArrayList) array content;
-	begin 
-		text result;
-		integer key_index, seed, rInt;
-		ref (ArrayList) prod_content;
-		! get the key for production content;
-		key_index := element_keys.indexOf(production);
-		OutText("The index of prod: "  & production & " is: "); 
-		OutInt(key_index, 2);
-		outImage;
-		
-		!get content ;
-		prod_content :- content(key_index);
-		!prod_content.print;
-		seed := 12543428;
-		rInt := randint(1,prod_content.length,seed);
-		outInt(rInt, 6); outImage;
-		OutText(prod_content.get(rInt));
-		
-		! put stuff in array. Each index has either
-		  a string or production
-		;
-		
-		
-		! look though array to find produxtion and recurse replace the <production> for new string;
-		
-		! iterate array and add to result ;
-
-		! clean the result ;
-		result :- result.strip;
-		outimage;
-		parseGrammer :- "wip"
-	end;
-	
 	
 
 	text file_name, read_image, start_production;
@@ -93,7 +52,7 @@ begin
 	element_keys :- new ArrayList(100);
 	content_pointer := 1; ! to keep track of where we are adding;
 	start_production :- ""; ! what is the start of out stuff ;
-	gg :- new GrammarGenerator( 83948 );
+	gg :- new GrammarGenerator( 543432 );
 
 	
 	file_name :- "edd.g";
@@ -149,7 +108,8 @@ begin
 			
 		
 	end;
-	OutText("start generation")
+	OutText("start generation"); 
+	Outimage;
 	OutText(gg.generateRec("<defect_type>"));
 	!outImage;
 	!outText(start_production);
