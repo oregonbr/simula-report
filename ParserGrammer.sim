@@ -40,11 +40,12 @@ begin
 	! --------------------------------------------- ;
 	
 	! split by isolating production in an array ;
-	ref (ArrayList) split_productions(input_line); text input_line; begin
+	ref (ArrayList) procedure split_productions(input_line); text input_line; begin
 		text segment;
 		integer i, p; ! for loop i, pointer p;
 		ref (ArrayList) elements;
-		
+		outtext("something");
+		outimage;
 		segment :- ""; ! idk if copy is nessesary;
 		p := 1;
 		input_line.setpos(1);
@@ -83,31 +84,37 @@ begin
 	!                generator content              ;                  
 	! --------------------------------------------- ;
 	
+	text procedure generate; begin
+		
+	
+		generate :- "wip";
+	end;
 	
 	! main stuff ;
 	text procedure generateRec(production); text production; begin
-		text result;
+		text result, rand_line;
 		integer rInt;
-		ref (ArrayList)	prod_cont;
+		ref (ArrayList)	prod_cont, split_cont;
 		
 		prod_cont :- get_content(production);
 		prod_cont.print;	
 		
 		rInt := randint(1,prod_cont.length,seed);
-		outInt(rInt, 6); outImage;
-		OutText(prod_cont.get(rInt));
+		outInt(rInt, 6);outImage;
+		rand_line :- prod_cont.get(rInt)
+		OutText(rand_line);
 		
 		! put stuff in array. Each index has either
 		  a string or production
 		;
-		
+		split_cont :- split_productions(rand_line)
 		
 		! look though array to find produxtion and recurse replace the <production> for new string;
 		
 		! iterate array and add to result ;
 
 		! clean the result ;
-		result :- result.strip
+		result :- result.strip;
 		generateRec :- Copy("wip");
 	end;
 
