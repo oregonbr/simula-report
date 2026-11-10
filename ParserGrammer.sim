@@ -42,13 +42,35 @@ begin
 	! split by isolating production in an array ;
 	text array split_productions(input_line); text line; begin
 		text segment;
-		integer i;
+		integer i, p; ! for loop i, pointer p;
+		text array elements;
 		
+		segment :- "" ! idk if copy is nessesary;
+		p := 1;
 		input_line.setpos(1);
 		segment.setpos(1);
 		
 		! iterate line chars ;
 		while input_line.more do begin
+			character cur_char;
+			
+			cur_char := input_line.getChar;
+			! when < shows up, then we have a production or close on > ;
+			if (cur_char = '<' or cur_char = '>') then begin
+			
+				! we send out to array what we have ;
+				if not(segment = "") then begin 
+					element(p) :- segment ;
+					! clear segment to begin adding this;
+					segment :- Copy("")
+					segment.setpos(1);
+				end;
+					
+			end;
+			else begin
+				! else add the character;
+				segment.putChar(cur_char);
+			end
 			
 		end;
 		

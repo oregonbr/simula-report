@@ -26,7 +26,7 @@ begin
 				if not (ch_to = ' ') then begin
 					currentChar := ch_to;
 					result.putchar(currentChar);
-					outchar(currentChar);
+					!outchar(currentChar);
 				end;
 			end 
 			else begin
