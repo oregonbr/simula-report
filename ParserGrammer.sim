@@ -38,9 +38,7 @@ begin
 	end;
 	
 	! get the content from a index;
-	ref (ArrayList) procedure get_content_int(index); integer index; begin
-		get_content_int :- content(index)
-	end;
+	ref (ArrayList) procedure get_content_int(index); integer index; get_content_int :- content(index)
 	
 	! starter ;
 	text procedure generate; begin
@@ -49,16 +47,16 @@ begin
 		generate :- "wip";
 	end;
 	
-	! main stuff;
+	! main stuff ;
 	text procedure generateRec(production); text production; begin
 		text result;
 		integer rInt;
 		ref (ArrayList)	prod_cont;
 		
-		prod_cont :- get_content(production);
-		prod_cont.print;	
+		!prod_cont :- get_content(production);
+		!prod_cont.print;	
 
-		generateRec :- "wip"
+		generateRec :- Copy("wip");
 	end;
 
 	content_pointer	:= 1;

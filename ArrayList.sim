@@ -40,7 +40,7 @@ begin
 		while ((not found) and (i <= pointer-1)) do 
 		begin
 			! if same, set result and stop ;
-			!OutText(items(i) & " " & content);outImage;
+			!OutText(items(i) & " " & content);
 			if (items(i) = content) then begin
 				result := i;
 				found := true;

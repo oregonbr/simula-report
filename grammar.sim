@@ -149,12 +149,8 @@ begin
 			
 		
 	end;
-	outImage;
-	!element_keys.print;
-	!gg.get_content_int(1).print;
-	!content(2).print;
-	!outImage;
-	outText(gg.generateRec("<defect_type>"));
+	OutText("start generation")
+	OutText(gg.generateRec("<defect_type>"));
 	!outImage;
 	!outText(start_production);
 	file.close;
