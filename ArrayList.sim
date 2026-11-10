@@ -1,0 +1,67 @@
+! start of array list ;
+class ArrayList(size); integer size;
+begin
+	Text array items(1:size);
+	integer pointer;
+	
+	! add elements to the array;
+	procedure add(content); Text content; 
+	begin
+		items(pointer) :- content;
+		pointer := pointer + 1;
+	end;
+	
+	! get element from index;
+	text procedure get(index); integer index;
+	begin
+		if ((index < 1) or (index >= pointer)) then 
+		begin
+			error("invalid index");
+		end;
+		
+		get :- items(index);
+		
+	end;
+		
+	! get length ;
+	integer procedure length;
+		length := pointer - 1;
+	
+	! get the index of an element;
+	integer procedure indexOf(content); Text content;
+	begin
+		boolean found;
+		integer i, result;
+		
+		found := false;
+		result := -1;
+		i := 1;
+		
+		while ((not found) and (i <= pointer-1)) do 
+		begin
+			! if same, set result and stop ;
+			!OutText(items(i) & " " & content);outImage;
+			if (items(i) = content) then begin
+				result := i;
+				found := true;
+			end;
+			i := i + 1
+		end;
+		indexOf := result;
+	end;
+	
+	procedure print; 
+	begin 
+		integer i;
+		OutText("Size is "); OutInt(pointer-1, 3);
+		outImage;
+		for i:= 1 step 1 until ( pointer - 1 ) do begin
+			outInt(i, 5);
+			OutText(" ")
+			OutText(items(i));
+			outImage;
+		end;
+	end;
+	! initialize pointer ;
+	pointer := 1;
+end;

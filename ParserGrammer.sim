@@ -1,0 +1,67 @@
+external class ArrayList;
+
+class GrammarGenerator (seed);
+	integer seed;
+begin 
+	ref (ArrayList) element_keys;
+	ref (ArrayList) array content(1:100);
+	integer content_pointer;
+	
+	
+	procedure add_key(key); text key;
+	begin
+		element_keys.add(key);
+		outText("added");outInt(content_pointer,4);Outimage;
+		content(content_pointer) :- new ArrayList(50);
+		content_pointer := content_pointer + 1;
+	end;
+	
+	! add content based on current pointer minus one ;
+	procedure add_content(input); text input; begin
+		outInt(content_pointer - 1, 2)
+		content(content_pointer - 1).add(input);
+	end;
+	
+	procedure set_pointer(number); integer number;
+	begin
+		content_pointer := number;
+	end;
+
+	! get the list of keys ;
+	ref (ArrayList) procedure get_keys; 
+	begin
+		get_keys :- element_keys;
+	end;
+	
+	! get the content of a key ;
+	ref (ArrayList) procedure get_content(key); text key; begin	
+		get_content :- content(element_keys.indexOf(key));
+	end;
+	
+	! get the content from a index;
+	ref (ArrayList) procedure get_content_int(index); integer index; begin
+		get_content_int :- content(index)
+	end;
+	
+	! starter ;
+	text procedure generate; begin
+		
+	
+		generate :- "wip";
+	end;
+	
+	! main stuff;
+	text procedure generateRec(production); text production; begin
+		text result;
+		integer rInt;
+		ref (ArrayList)	prod_cont;
+		
+		prod_cont :- get_content(production);
+		prod_cont.print;	
+
+		generateRec :- "wip"
+	end;
+
+	content_pointer	:= 1;
+	element_keys :- new ArrayList(100);
+end;

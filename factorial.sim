@@ -1,0 +1,13 @@
+begin
+	integer procedure factorial(num); integer num;
+	begin
+		factorial := if (num > 1) then (factorial(num - 1) * num ) else 1;
+	end;
+	
+	integer outVal;
+	
+	outVal := factorial(5)
+	
+	outInt(outVal, 10)
+
+end;
