@@ -21,21 +21,13 @@ begin
 	! where is the pointer minus 1 at? ;
 	text procedure current_add; current_add :- element_keys.get(content_pointer - 1);
 	
-	procedure set_pointer(number); integer number;
-	begin
-		content_pointer := number;
-	end;
+	procedure set_pointer(number); integer number; content_pointer := number;
 
 	! get the list of keys ;
-	ref (ArrayList) procedure get_keys; 
-	begin
-		get_keys :- element_keys;
-	end;
+	ref (ArrayList) procedure get_keys; get_keys :- element_keys;
 	
 	! get the content of a key ;
-	ref (ArrayList) procedure get_content(key); text key; begin	
-		get_content :- content(element_keys.indexOf(key));
-	end;
+	ref (ArrayList) procedure get_content(key); text key; get_content :- content(element_keys.indexOf(key));
 	
 	! get the content from a index;
 	ref (ArrayList) procedure get_content_int(index); integer index; get_content_int :- content(index)
