@@ -44,12 +44,12 @@ begin
 		text segment;
 		integer i, p; ! for loop i, pointer p;
 		ref (ArrayList) elements;
-		outtext("something");
 		outimage;
-		segment :- ""; ! idk if copy is nessesary;
+		segment :- Blanks(1000); ! idk if copy is nessesary;
 		p := 1;
 		input_line.setpos(1);
 		segment.setpos(1);
+		elements :- new ArrayList(100)
 		
 		! iterate line chars ;
 		while input_line.more do begin
@@ -61,10 +61,11 @@ begin
 			
 				! we send out to array what we have ;
 				if not(segment = "") then begin 
-					elements.add(segment) ;
+					text outText;
+					elements.add(segment.strip) ;
 					
 					! clear segment to begin adding this;
-					segment :- Copy("");
+					segment :- Blanks(1000);
 					segment.setpos(1);
 				end;
 					
@@ -107,14 +108,14 @@ begin
 		! put stuff in array. Each index has either
 		  a string or production
 		;
-		split_cont :- split_productions(rand_line)
+		split_cont :- split_productions(rand_line);
 		
 		! look though array to find produxtion and recurse replace the <production> for new string;
 		
 		! iterate array and add to result ;
 
 		! clean the result ;
-		result :- result.strip;
+		!result :- result.strip;
 		generateRec :- Copy("wip");
 	end;
 
