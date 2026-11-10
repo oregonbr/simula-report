@@ -139,11 +139,11 @@ begin
 					line :- replace(line, ';', ' ').strip;
 					gg.add_content(line)
 					OutText("added to "); 
+					OutText(gg.current_add);
 				end;
 			end;
 			
 			
-			outImage;
 			outImage;
 		end;
 			

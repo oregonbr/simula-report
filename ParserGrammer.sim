@@ -11,16 +11,15 @@ begin
 	procedure add_key(key); text key;
 	begin
 		element_keys.add(key);
-		outText("added");outInt(content_pointer,4);Outimage;
 		content(content_pointer) :- new ArrayList(50);
 		content_pointer := content_pointer + 1;
 	end;
 	
 	! add content based on current pointer minus one ;
-	procedure add_content(input); text input; begin
-		outInt(content_pointer - 1, 2)
-		content(content_pointer - 1).add(input);
-	end;
+	procedure add_content(input); text input; content(content_pointer - 1).add(input);
+	
+	! where is the pointer minus 1 at? ;
+	text procedure current_add; current_add :- element_keys.get(content_pointer - 1);
 	
 	procedure set_pointer(number); integer number;
 	begin
