@@ -40,12 +40,12 @@ begin
 	! --------------------------------------------- ;
 	
 	! split by isolating production in an array ;
-	text array split_productions(input_line); text line; begin
+	ref (ArrayList) split_productions(input_line); text input_line; begin
 		text segment;
 		integer i, p; ! for loop i, pointer p;
-		text array elements;
+		ref (ArrayList) elements;
 		
-		segment :- "" ! idk if copy is nessesary;
+		segment :- ""; ! idk if copy is nessesary;
 		p := 1;
 		input_line.setpos(1);
 		segment.setpos(1);
@@ -60,21 +60,22 @@ begin
 			
 				! we send out to array what we have ;
 				if not(segment = "") then begin 
-					element(p) :- segment ;
+					elements.add(segment) ;
+					
 					! clear segment to begin adding this;
-					segment :- Copy("")
+					segment :- Copy("");
 					segment.setpos(1);
 				end;
 					
-			end;
+			end
 			else begin
 				! else add the character;
 				segment.putChar(cur_char);
-			end
+			end;
 			
 		end;
-		
-		
+		elements.print;
+		split_productions :- elements;
 	end;
 	
 	
@@ -82,11 +83,6 @@ begin
 	!                generator content              ;                  
 	! --------------------------------------------- ;
 	
-	text procedure generate; begin
-		
-	
-		generate :- "wip";
-	end;
 	
 	! main stuff ;
 	text procedure generateRec(production); text production; begin
