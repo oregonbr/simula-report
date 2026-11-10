@@ -1,3 +1,9 @@
+!
+	By Levi Interian Uc
+	For CSIS 420 simula report
+	Some redundancy for clearity
+;
+
 external class ArrayList;
 
 class GrammarGenerator (seed);
@@ -43,7 +49,9 @@ begin
 	ref (ArrayList) procedure split_productions(input_line); text input_line; begin
 		text segment;
 		integer i, p; ! for loop i, pointer p;
-		ref (ArrayList) elements;
+		ref (ArrayList) elements;		
+		outtext("dealing with " & input_line);outimage;
+
 		outimage;
 		segment :- Blanks(1000); ! idk if copy is nessesary;
 		p := 1;
@@ -53,7 +61,8 @@ begin
 		
 		! iterate line chars ;
 		while input_line.more do begin
-			character cur_char;
+			character cur_char, prev_char;
+			! previous char helps adds back the space we striped ;
 			
 			cur_char := input_line.getChar;
 			! when < shows up, then we have a production or close on > ;
@@ -61,8 +70,12 @@ begin
 			
 				! we send out to array what we have ;
 				if not(segment = "") then begin 
-					text outText;
-					elements.add(segment.strip) ;
+					text outTxt;
+					outTxt :- segment.strip
+					!if();
+					! add back <if needed>;
+					if(cur_char = '>') then outTxt :- "<" & outTxt & ">" 
+					elements.add(outTxt) ;
 					
 					! clear segment to begin adding this;
 					segment :- Blanks(1000);
@@ -76,7 +89,9 @@ begin
 			end;
 			
 		end;
-		elements.print;
+		outimage;
+		!elements.print;
+		!outText("for ");
 		split_productions :- elements;
 	end;
 	
@@ -94,29 +109,48 @@ begin
 	! main stuff ;
 	text procedure generateRec(production); text production; begin
 		text result, rand_line;
-		integer rInt;
+		integer rInt, i;
 		ref (ArrayList)	prod_cont, split_cont;
 		
 		prod_cont :- get_content(production);
 		prod_cont.print;	
 		
 		rInt := randint(1,prod_cont.length,seed);
-		outInt(rInt, 6);outImage;
+		outText("chosen rand: "); outInt(rInt, 2);OutText(" "&rand_line); outImage;
 		rand_line :- prod_cont.get(rInt)
-		OutText(rand_line);
 		
 		! put stuff in array. Each index has either
 		  a string or production
 		;
 		split_cont :- split_productions(rand_line);
+		outimage;
+		outtext("split pre");outimage;
+		split_cont.print;
 		
-		! look though array to find produxtion and recurse replace the <production> for new string;
+		! look though array to find produxtion and recurse replace the <production> for new string;		
+		i := 1;
+		for i := 1 step 1 until (split_cont.length ) do begin
+			integer key_index;
+			text new_text;
+			key_index :- element_keys.indexOf(split_cont.get(i));
+			if not (key_index = -1 ) then begin
+				new_text :- generateRec(Copy(element_keys.get(key_index)));
+				split_cont.set(key_index, new_text);
+			end;
+		end;
+		outimage;
+		outtext("split post");outimage;
+		split_cont.print;
 		
 		! iterate array and add to result ;
-
+		i := 1;
+		for i := 1 step 1 until (split_cont.length ) do begin
+			result :- result & Copy(split_cont.get(i)); ! I probably don't need copy;
+		end;
 		! clean the result ;
 		!result :- result.strip;
-		generateRec :- Copy("wip");
+		outtext("out result " & result);
+		generateRec :- result;
 	end;
 
 	content_pointer	:= 1;
