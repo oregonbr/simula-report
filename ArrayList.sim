@@ -18,7 +18,7 @@ begin
 	end;
 		
 	! set value ;
-	procedure set_val(index, val); integer index; text val; begin 
+	procedure set(index, val); integer index; text val; begin 
 		if ((index < 1) or (index > pointer)) then error("invalid set index");
 		items(index) :- val;
 	end;

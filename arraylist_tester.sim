@@ -43,4 +43,19 @@ begin
 	Outtext("what is up should be 3: ");
 	outint(o.indexOf("what is up"), 3); outimage;
 	
+	! set testing ;
+	Outtext("Old is: " & o.get(1));
+	o.set(1, "2");
+	Outtext(" New is: " & o.get(1));  
+	outimage;outimage;
+	
+	Outtext("Old is: " & o.get(3));
+	o.set(3, "nothing much");	
+	Outtext(" New is: " & o.get(3)); 
+
+	outimage; outimage;
+	outtext("final status");
+	
+	o.print;
+	
 end;
