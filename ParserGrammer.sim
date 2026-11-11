@@ -71,14 +71,12 @@ begin
 		
 		! iterate line chars ;
 		while not (input_line.pos = p) do begin
-			outChar(cur_char);outtext(" is the char ");outint(p, 3);Outimage;
 			if (cur_char = '<') then begin
 				elements.add(input_line.sub(prev_p, p - prev_p));
 				prev_p := p
 			end
 			else if (cur_char = '>') then begin
 				Outtext("Text is > "); Outimage;
-				outint(p, 4); outint(prev_p, 5); outint(input_line.pos, 5); outimage;
 				elements.add(input_line.sub(prev_p, p - prev_p + 1));
 				prev_p := p + 1;
 
@@ -127,9 +125,24 @@ begin
 		outtext("split pre");outimage;
 		split_cont.print;
 		
+		! look though array to find produxtion and recurse replace the <production> for new string;		
+		for i := 1 step 1 until (split_cont.length ) do begin
+			integer key_index;
+			text new_text;
+			key_index :- element_keys.indexOf(split_cont.get(i));
+			if not (key_index = -1 ) then begin
+				new_text :- generateRec(element_keys.get(key_index));
+				outimage;
+				OutText("set " & new_text);outint(key_index, 7);
+				split_cont.set(i, new_text);
+				outimage;
+				OutText("set");
+			end;
+		end;
+		
 		! iterate array and add to result ;
 		for i := 1 step 1 until (split_cont.length ) do begin
-			result :- result & Copy(split_cont.get(i)); ! I probably don't need copy;
+			result :- result & split_cont.get(i); ! I probably don't need copy;
 		end;
 		
 		! clean the result ;
