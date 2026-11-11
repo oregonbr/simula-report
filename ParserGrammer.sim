@@ -53,11 +53,11 @@ begin
 		outtext("dealing with " & input_line);outimage;
 
 		outimage;
-		segment :- Blanks(1000); ! idk if copy is nessesary;
+		segment :- Blanks(1000);
 		p := 1;
 		input_line.setpos(1);
 		segment.setpos(1);
-		elements :- new ArrayList(100)
+		elements :- new ArrayList(100);
 		
 		! iterate line chars ;
 		while input_line.more do begin
@@ -69,12 +69,12 @@ begin
 			if (cur_char = '<' or cur_char = '>') then begin
 			
 				! we send out to array what we have ;
-				if not(segment = "") then begin 
+				if not(segment.strip = "") then begin 
 					text outTxt;
-					outTxt :- segment.strip
+					outTxt :- segment.strip;
 					!if();
 					! add back <if needed>;
-					if(cur_char = '>') then outTxt :- "<" & outTxt & ">" 
+					if(cur_char = '>') then outTxt :- "<" & outTxt & ">" ;
 					elements.add(outTxt) ;
 					
 					! clear segment to begin adding this;
@@ -89,6 +89,7 @@ begin
 			end;
 			
 		end;
+		if not(segment.strip = "") then elements.add(segment.strip);
 		outimage;
 		!elements.print;
 		!outText("for ");
@@ -134,8 +135,12 @@ begin
 			text new_text;
 			key_index :- element_keys.indexOf(split_cont.get(i));
 			if not (key_index = -1 ) then begin
-				new_text :- generateRec(Copy(element_keys.get(key_index)));
-				split_cont.set(key_index, new_text);
+				new_text :- generateRec(element_keys.get(key_index));
+				outimage;
+				OutText("set");
+				!split_cont.set_val(key_index, new_text);
+				outimage;
+				OutText("set");
 			end;
 		end;
 		outimage;
@@ -145,12 +150,12 @@ begin
 		! iterate array and add to result ;
 		i := 1;
 		for i := 1 step 1 until (split_cont.length ) do begin
-			result :- result & Copy(split_cont.get(i)); ! I probably don't need copy;
+			!result :- result & Copy(split_cont.get(i)); ! I probably don't need copy;
 		end;
 		! clean the result ;
 		!result :- result.strip;
 		outtext("out result " & result);
-		generateRec :- result;
+		generateRec :- "ip";
 	end;
 
 	content_pointer	:= 1;

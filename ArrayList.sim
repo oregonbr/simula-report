@@ -18,7 +18,11 @@ begin
 		get :- items(index);
 	end;
 		
-	procedure set(index, val); integer index; text val; begin items(index) :- val; end;
+	procedure set_val(index, val); integer index; text val; begin
+		Outimage;outtext("From " & items(index)); Outimage;
+		items(index) :- val; 
+		outtext("To " & items(index)); Outimage	;
+	end;
 		
 	! get length ;
 	integer procedure length;
