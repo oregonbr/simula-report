@@ -127,7 +127,15 @@ begin
 		outtext("split pre");outimage;
 		split_cont.print;
 		
+		! iterate array and add to result ;
+		for i := 1 step 1 until (split_cont.length ) do begin
+			result :- result & Copy(split_cont.get(i)); ! I probably don't need copy;
+		end;
 		
+		! clean the result ;
+		result :- result.strip;
+		outtext("out result " & result);
+		generateRec :- result;
 	end;
 
 	content_pointer	:= 1;
