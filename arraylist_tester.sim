@@ -1,0 +1,46 @@
+begin 
+	external class ArrayList;
+
+	ref (ArrayList) o;
+	boolean valid_val;
+	
+	o :- new ArrayList(100);
+	
+	! adding stuff ;
+	o.add("1");
+	o.add("lol");
+	o.add("what is up");
+	
+	o.print;
+	
+	! index testing ;
+	OutText("1 should be valid: ");
+	OutText(if o.isValidIndex(1) then "true" else "false");
+	outimage;
+	
+	OutText("2 should be valid: ");
+	OutText(if o.isValidIndex(2) then "true" else "false");
+	outimage;
+
+	OutText("4 should not be valid: ");
+	OutText(if o.isValidIndex(4) then "true" else "false");
+	outimage;
+	
+	! index testing ;
+	outText(o.get(1));
+	outimage;
+
+	!outtext(o.get(4)); 	! this should not work, error, by design;
+	!outimage;
+	
+	! indexOf testing ;
+	Outtext("y should be -1: ");
+	outint(o.indexOf("y"), 3); outimage;
+
+	Outtext("1 should be 1: ");
+	outint(o.indexOf("1"), 3); outimage;
+	
+	Outtext("what is up should be 3: ");
+	outint(o.indexOf("what is up"), 3); outimage;
+	
+end;

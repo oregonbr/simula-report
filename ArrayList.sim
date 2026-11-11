@@ -12,24 +12,25 @@ begin
 	end;
 	
 	! get element from index;
-	text procedure get(index); integer index;
-	begin
-		if ((index < 1) or (index >= pointer)) then error("invalid index");
+	text procedure get(index); integer index; begin
+		if ((index < 1) or (index >= pointer)) then error("invalid get index");
 		get :- items(index);
 	end;
 		
-	procedure set_val(index, val); integer index; text val; begin
-		Outimage;outtext("From " & items(index)); Outimage;
-		items(index) :- val; 
-		outtext("To " & items(index)); Outimage	;
+	! set value ;
+	procedure set_val(index, val); integer index; text val; begin 
+		if ((index < 1) or (index > pointer)) then error("invalid set index");
+		items(index) :- val;
 	end;
+	
+	! is our index valid to insert? ;
+	boolean procedure isValidIndex(index); integer index; isValidIndex := ((index >= 1) and (index <= (pointer - 1)));
 		
 	! get length ;
-	integer procedure length;
-		length := pointer - 1;
+	integer procedure length; length := pointer - 1;
 	
 	! get the index of an element;
-	integer procedure indexOf(content); Text content;
+	integer procedure indexOf(content); Text content; 
 	begin
 		boolean found;
 		integer i, result;
@@ -57,9 +58,8 @@ begin
 		OutText("Size is "); OutInt(pointer-1, 3);
 		outImage;
 		for i := 1 step 1 until ( pointer - 1 ) do begin
-			outInt(i, 5);
-			OutText(" ")
-			OutText(items(i));
+			outInt(i, 4);
+			OutText(" " & items(i));
 			outImage;
 		end;
 	end;
