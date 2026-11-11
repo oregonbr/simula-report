@@ -79,7 +79,9 @@ begin
 				Outtext("Text is > "); Outimage;
 				elements.add(input_line.sub(prev_p, p - prev_p + 1));
 				prev_p := p + 1;
-
+			end
+			else if (p-4 = input_line.pos) then begin
+				elements.add(input_line.sub(prev_p, p - prev_p + 1));
 			end;
 		
 			prev_char := cur_char;
@@ -88,7 +90,7 @@ begin
 			
 		end;
 		outimage;
-		!elements.print;
+		elements.print;
 		!outText("for ");
 		split_productions :- elements;
 	end;
@@ -133,15 +135,20 @@ begin
 			if not (key_index = -1 ) then begin
 				new_text :- generateRec(element_keys.get(key_index));
 				outimage;
-				OutText("set " & new_text);outint(key_index, 7);
+				OutText("set: " & new_text);outint(key_index, 7);outimage;
+				Outtext("old: " & split_cont.get(i));outimage;
 				split_cont.set(i, new_text);
+				Outtext("new: " & split_cont.get(i));outimage;
 				outimage;
 				OutText("set");
 			end;
 		end;
 		
+		outtext("Out print:"); outimage;
+		split_cont.print;
 		! iterate array and add to result ;
 		for i := 1 step 1 until (split_cont.length ) do begin
+			outtext(split_cont.get(i)); outimage;
 			result :- result & split_cont.get(i); ! I probably don't need copy;
 		end;
 		

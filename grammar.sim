@@ -110,8 +110,9 @@ begin
 	end;
 	OutText("start generation"); 
 	Outimage;
-	gg.generateRec("<defect_type>");
+	!gg.generateRec("<defect_type>");
+	gg.generateRec("<num_vals>");
 	!outImage;
-	outText("lol "); outimage;
+	!outText("lol "); outimage;
 	file.close;
 end;
