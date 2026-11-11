@@ -47,49 +47,42 @@ begin
 	
 	! split by isolating production in an array ;
 	ref (ArrayList) procedure split_productions(input_line); text input_line; begin
-		text segment;
-		integer i, p; ! for loop i, pointer p;
+		text segment; 
+		character cur_char, prev_char;
+		integer i, p, prev_p; ! for loop i, pointer p;
+		! previous pointer is  ;
 		ref (ArrayList) elements;		
 		outtext("dealing with " & input_line);outimage;
-
 		outimage;
+		
+		! initialize ;
 		segment :- Blanks(1000);
-		p := 1;
-		input_line.setpos(1);
 		segment.setpos(1);
+		input_line.setpos(1);
+		
+		p := 1;
+		prev_p := 1;
+		
+		cur_char := input_line.getChar;
+		prev_char := char(0);
+		
 		elements :- new ArrayList(100);
 		
 		! iterate line chars ;
 		while input_line.more do begin
-			character cur_char, prev_char;
-			! previous char helps adds back the space we striped ;
-			
-			cur_char := input_line.getChar;
-			! when < shows up, then we have a production or close on > ;
-			if (cur_char = '<' or cur_char = '>') then begin
-			
-				! we send out to array what we have ;
-				if not(segment.strip = "") then begin 
-					text outTxt;
-					outTxt :- segment.strip;
-					!if();
-					! add back <if needed>;
-					if(cur_char = '>') then outTxt :- "<" & outTxt & ">" ;
-					elements.add(outTxt) ;
-					
-					! clear segment to begin adding this;
-					segment :- Blanks(1000);
-					segment.setpos(1);
-				end;
-					
+			if (cur_char = '<') then begin
+				
 			end
-			else begin
-				! else add the character;
-				segment.putChar(cur_char);
+			else if (cur_char = '>') begin
+			
 			end;
+		
+			prev_char := cur_char;
+			cur_char := input_line.getChar;
+			p := p + 1;
 			
 		end;
-		if not(segment.strip = "") then elements.add(segment.strip);
+		!elements.add(segment.strip);
 		outimage;
 		!elements.print;
 		!outText("for ");
@@ -129,7 +122,6 @@ begin
 		split_cont.print;
 		
 		! look though array to find produxtion and recurse replace the <production> for new string;		
-		i := 1;
 		for i := 1 step 1 until (split_cont.length ) do begin
 			integer key_index;
 			text new_text;
@@ -137,8 +129,8 @@ begin
 			if not (key_index = -1 ) then begin
 				new_text :- generateRec(element_keys.get(key_index));
 				outimage;
-				OutText("set");
-				!split_cont.set_val(key_index, new_text);
+				OutText("set " & new_text);outint(key_index, 7);
+				split_cont.set(i, new_text);
 				outimage;
 				OutText("set");
 			end;
@@ -148,14 +140,13 @@ begin
 		split_cont.print;
 		
 		! iterate array and add to result ;
-		i := 1;
 		for i := 1 step 1 until (split_cont.length ) do begin
-			!result :- result & Copy(split_cont.get(i)); ! I probably don't need copy;
+			result :- result & Copy(split_cont.get(i)); ! I probably don't need copy;
 		end;
 		! clean the result ;
-		!result :- result.strip;
+		result :- result.strip;
 		outtext("out result " & result);
-		generateRec :- "ip";
+		generateRec :- result;
 	end;
 
 	content_pointer	:= 1;

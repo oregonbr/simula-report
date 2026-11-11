@@ -112,6 +112,6 @@ begin
 	Outimage;
 	OutText(gg.generateRec("<defect_type>"));
 	!outImage;
-	!outText(start_production);
+	outText("lol "); outimage;
 	file.close;
 end;
